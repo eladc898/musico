@@ -1,7 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
-import { TestComponent } from './components/test/test.component';
-
+import { TrackListComponent } from './components/track-list/track-list.component';
 export const routes = [
-	{ path: '', redirectTo: 'test', pathMatch: 'full' },
-	{ path: 'test', component: TestComponent }
+	{ path: '', redirectTo: 'track_list', pathMatch: 'full' },
+	{ path: 'track_list', component: TrackListComponent }
 ];

@@ -5,14 +5,14 @@ import { RouterModule } from '@angular/router';
 import { routes } from './routes';
 
 import { AppComponent } from './app.component';
-import { TestComponent } from './components/test/test.component';
 import { TrackComponent } from './components/track/track.component';
+import { TrackListComponent } from './components/track-list/track-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TestComponent,
-    TrackComponent
+    TrackComponent,
+    TrackListComponent
   ],
   imports: [
     RouterModule.forRoot(routes, {useHash: true}),
