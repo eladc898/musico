@@ -1,12 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { HttpModule } from '@angular/http';
 
 import { routes } from './routes';
 
 import { AppComponent } from './app.component';
 import { TrackComponent } from './components/track/track.component';
 import { TrackListComponent } from './components/track-list/track-list.component';
+import { DataService } from './data-service';
 
 @NgModule({
   declarations: [
@@ -16,9 +18,11 @@ import { TrackListComponent } from './components/track-list/track-list.component
   ],
   imports: [
     RouterModule.forRoot(routes, {useHash: true}),
-    BrowserModule
+    BrowserModule,
+    HttpModule
   ],
   providers: [
+    DataService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,5 +1,10 @@
 <div class="track-list-container">
-  <div class="sync-and-play">
-    <button class="sync">sync</button>
+  <div class="content">
+    <div class="sync-and-play">
+      <button class="sync-btn" (click)="onSync()">sync</button>
+      <div class="play-btn">play</div>
+      <div class="track-select">select track</div>
+    </div>
+    <app-track></app-track>
   </div>
 </div>

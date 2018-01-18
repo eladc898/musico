@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../../data-service';
 
 @Component({
   selector: 'app-track-list',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TrackListComponent implements OnInit {
 
-  constructor() { }
+  tracksList = [];
+  constructor(private dataService: DataService) {}
 
   ngOnInit() {
+    this.dataService.getAll().then(data => {
+      this.tracksList = data['TrackList'];
+      console.log('this.tracksList', this.tracksList);
+    }).catch((err: any) => console.log(err));
   }
-
 }
