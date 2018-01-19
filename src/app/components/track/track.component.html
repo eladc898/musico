@@ -1,18 +1,22 @@
 <div class="track-container">
   <div class="play-track-container">
-    <div class="play-single-track"></div>
+    <div class="play-single-track" (click)="togglePlay()" [ngClass]="{'play-icon': !currentTrack.isPlaying, 'pause-icon': currentTrack.isPlaying}"></div>
   </div>
+  <audio id="player">
+      <source src="https://s3.amazonaws.com/candidate-task/Track+1.mp3" type="audio/mp3" />
+  </audio>
   <div class="track-info">
     <div class="owner">Ori Winkour</div>
     <div class="musical-instruments">Garage Drums</div>
     <div class="bpm">bpm: 120</div>
-    <!-- <i class="fa fa-camera-retro fa-5x icon" aria-hidden="true"></i> -->
   </div>
   <div class="trash-and-bar">
     <i class="fa fa-trash-o trash-icon" aria-hidden="true"></i>
     <div class="bar-and-volume">
-      <i class="fa fa-volume-up" aria-hidden="true"></i>
-      <div class="bar">bar</div>
+      <i class="fa pointer" aria-hidden="true" (click)="toggleVolume()"
+        [ngClass]="{'fa-volume-up': !currentTrack.isMuted, 'fa-volume-down': currentTrack.isPlaying}">
+      </i>
+      <input id="vol-control" class="bar" type="range" min="0" max="100" step="1" />
     </div>
   </div>
 </div>
