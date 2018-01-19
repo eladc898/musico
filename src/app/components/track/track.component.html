@@ -3,10 +3,10 @@
     <div class="play-single-track" (click)="togglePlay()" [ngClass]="{'play-icon': !currentTrack.isPlaying, 'pause-icon': currentTrack.isPlaying}"></div>
   </div>
   <audio id="player">
-      <source src="https://s3.amazonaws.com/candidate-task/Track+1.mp3" type="audio/mp3" />
+      <source src="{{track.url}}" type="audio/mp3" />
   </audio>
   <div class="track-info">
-    <div class="owner">Ori Winkour</div>
+    <div class="owner">{{track.owner}}</div>
     <div class="musical-instruments">Garage Drums</div>
     <div class="bpm">bpm: 120</div>
   </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit  } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-track',
@@ -6,6 +6,7 @@ import { Component, OnInit, AfterViewInit  } from '@angular/core';
   styleUrls: ['./track.component.scss']
 })
 export class TrackComponent implements OnInit, AfterViewInit  {
+  @Input() track: any;
   player: any;
   currentTrack: {
     isPlaying: boolean;
