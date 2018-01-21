@@ -70,6 +70,9 @@
       width: 100%;
       display: flex;
       justify-content: space-between;
+      .volume-icon {
+        padding-top: 5px;
+      }
       .bar {
         width: 40px;
       }

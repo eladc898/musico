@@ -18,7 +18,7 @@
   <div class="trash-and-bar">
     <i class="fa fa-trash-o trash-icon pointer" aria-hidden="true" (click)="removeTrack()"></i>
     <div class="bar-and-volume">
-      <i class="fa pointer" aria-hidden="true" (click)="toggleVolume()"
+      <i class="fa pointer volume-icon" aria-hidden="true" (click)="toggleVolume()"
         [ngClass]="{'fa-volume-up': !currentTrackInfo.isMuted, 'fa-volume-down': currentTrackInfo.isMuted}">
       </i>
       <input id="progress-bar-{{track.Id}}" class="bar pointer" value="0" type="range" min="0" max="1" step="any" />
