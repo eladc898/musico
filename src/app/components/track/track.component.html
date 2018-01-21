@@ -1,22 +1,22 @@
 <div class="track-container">
   <div class="play-track-container">
-    <div class="play-single-track" (click)="togglePlay()" [ngClass]="{'play-icon': !currentTrack.isPlaying, 'pause-icon': currentTrack.isPlaying}"></div>
+    <div class="play-single-track pointer" (click)="togglePlay()" [ngClass]="{'play-icon': !currentTrack.isPlaying, 'pause-icon': currentTrack.isPlaying}"></div>
   </div>
-  <audio id="player">
-      <source src="{{track.url}}" type="audio/mp3" />
+  <audio id="player-{{track.Id}}">
+      <source src="{{ track.url }}" type="audio/mp3" />
   </audio>
   <div class="track-info">
-    <div class="owner">{{track.owner}}</div>
-    <div class="musical-instruments">Garage Drums</div>
-    <div class="bpm">bpm: 120</div>
+    <div class="owner">{{ track.owner }}</div>
+    <div class="musical-instruments">{{ track.instrument }}</div>
+    <div class="bpm">bpm: {{ track.bpm}}</div>
   </div>
   <div class="trash-and-bar">
-    <i class="fa fa-trash-o trash-icon" aria-hidden="true"></i>
+    <i class="fa fa-trash-o trash-icon pointer" aria-hidden="true" (click)="removeTrack()"></i>
     <div class="bar-and-volume">
       <i class="fa pointer" aria-hidden="true" (click)="toggleVolume()"
-        [ngClass]="{'fa-volume-up': !currentTrack.isMuted, 'fa-volume-down': currentTrack.isPlaying}">
+        [ngClass]="{'fa-volume-up': !currentTrack.isMuted, 'fa-volume-down': currentTrack.isMuted}">
       </i>
-      <input id="vol-control" class="bar" type="range" min="0" max="100" step="1" />
+      <input id="progress-bar-{{track.Id}}" class="bar pointer" value="0" type="range" min="0" max="1" step="any" />
     </div>
   </div>
 </div>

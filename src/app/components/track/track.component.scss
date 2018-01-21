@@ -16,8 +16,7 @@
       border-radius: 50%;
       border: 1px solid black;
       background-repeat: no-repeat;
-      background-position: 11px center;
-      cursor: pointer;
+      background-position: center;
       &.play-icon {
         background-image: url('/assets/play-button.png');
       }
@@ -30,14 +29,19 @@
     width:120px;
     display: flex;
     flex-direction: column;
+    .owner {
+      font-size: 16px;
+    }
     .musical-instruments {
-      font-size: 12px;
-      margin-top: 8px;
+      font-size: 14px;
+      margin-top: 6px;
     }
     .bpm {
-      font-size: 12px;
+      font-size: 10px;
+      font-weight: bold;
       color: #C5C2C1;
-      margin-top: 5px;
+      margin-top: 3px;
+      text-transform: uppercase;
     }
   }
   .trash-and-bar {

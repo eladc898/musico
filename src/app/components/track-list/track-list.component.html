@@ -2,9 +2,17 @@
   <div class="content">
     <div class="sync-and-play">
       <button class="sync-btn" (click)="onSync()">sync</button>
-      <div class="play-btn">play</div>
-      <div class="track-select">select track</div>
+      <div class="play-btn" (click)="playAll()">play all</div>
+      <app-dropdown class="track-select" [options]="trackIds" 
+        [placeholderText]="'Select Track'" [clickableWidth]="230" 
+        (onSelection)="onTrackSelection($event)"
+        [withValidations]="false" [reset$]="clearFilter$">
+      </app-dropdown>
     </div>
-    <app-track [track]="tracksList[0]"></app-track>
+    <div class="tracks">
+      <app-track *ngFor="let track of displayedTracks; let i = index" 
+        [track]="track" (removeTrackEvt)="onRemoveTrack($event)">
+      </app-track>
+    </div>
   </div>
 </div>

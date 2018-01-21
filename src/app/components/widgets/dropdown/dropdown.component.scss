@@ -1,0 +1,42 @@
+.clickable-area {
+  position: relative;
+  height: 30px;
+  border-radius: 2px;
+  line-height: 30px;
+  // border: 1px solid #cccccc;
+  cursor: pointer;
+  font-family: 'Roboto';
+
+  .dropdown-arrow {
+    position: absolute;
+    top: 16px;
+    right: 0px;
+  }
+  
+  .clickable-area-ghost-text{
+    font-size: 16px;
+    color: #C5C2C1;
+  }
+
+  .clickable-area-text{
+    margin-left: 10px;
+    font-size: 14px;
+  }
+
+  .options-area{
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 40px;
+    border: 1px solid #A9A8A8;
+    border-radius: 2px;
+    padding-left: 5px;
+    z-index: 100;
+    cursor: pointer;
+    background-color: white;
+
+    .option-text {
+      font-size: 14px;
+    }
+  }
+}

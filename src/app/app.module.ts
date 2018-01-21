@@ -8,13 +8,15 @@ import { routes } from './routes';
 import { AppComponent } from './app.component';
 import { TrackComponent } from './components/track/track.component';
 import { TrackListComponent } from './components/track-list/track-list.component';
+import { DropdownComponent } from './components/widgets/dropdown/dropdown.component';
 import { DataService } from './data-service';
 
 @NgModule({
   declarations: [
     AppComponent,
     TrackComponent,
-    TrackListComponent
+    TrackListComponent,
+    DropdownComponent
   ],
   imports: [
     RouterModule.forRoot(routes, {useHash: true}),
