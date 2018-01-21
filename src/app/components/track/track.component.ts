@@ -13,8 +13,10 @@ export class TrackComponent implements OnInit, AfterViewInit, OnChanges {
   @Output() removeTrackEvt: EventEmitter<string> = new EventEmitter<string>();
   @Output() addPlayerEvt: EventEmitter<any> = new EventEmitter<any>();
 
+  STARTING_OFFSET = 113;
   player;
   progressBar;
+  circleprogressBar;
   currentTrackInfo: {
     isPlaying: boolean;
     isMuted: boolean;
@@ -29,6 +31,7 @@ export class TrackComponent implements OnInit, AfterViewInit, OnChanges {
   ngAfterViewInit() {
     this.player = document.getElementById('player-' + this.track.Id);
     this.progressBar = document.getElementById('progress-bar-' + this.track.Id);
+    this.circleprogressBar = document.getElementById('circle-' + this.track.Id);
     this.player.addEventListener('timeupdate' , this.updateProgressBar);
     this.player.addEventListener('ended', this.resetTrack);
     this.player.addEventListener('loadedmetadata', () => {
@@ -54,7 +57,8 @@ export class TrackComponent implements OnInit, AfterViewInit, OnChanges {
     if (!this.player) { return; }
     console.log('currentTime', this.player.currentTime);
     console.log('duration', this.player.duration);
-    this.progressBar.value = this.player.currentTime / this.player.duration ;
+    this.progressBar.value = this.player.currentTime / this.player.duration;
+    this.circleprogressBar.style['stroke-dashoffset'] = (this.progressBar.value * this.STARTING_OFFSET + this.STARTING_OFFSET)  + 'px';
   }
 
   resetTrack = () => {
@@ -63,7 +67,6 @@ export class TrackComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   togglePlay = () => {
-    console.log('this.track', this.track);
     this.currentTrackInfo.isPlaying = !this.currentTrackInfo.isPlaying;
     if (this.currentTrackInfo.isPlaying) {
       this.player.play();
@@ -89,5 +92,10 @@ export class TrackComponent implements OnInit, AfterViewInit, OnChanges {
   getCurrentProgress = () => {
     if (!this.player) { return 0; }
     return this.player.currentTime / this.player.duration;
+  }
+  
+  getNameFromUrl = (url: string) => {
+    const tmpArr = url.split('/');
+    return tmpArr[tmpArr.length - 1].split('.')[0].replace('+', ' ');
   }
 }

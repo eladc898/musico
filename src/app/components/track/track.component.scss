@@ -10,6 +10,8 @@
   display: flex;
   .play-track-container {
     width:50px;
+    position: relative;
+    padding-left: 3px;
     .play-single-track {
       height: 35px;
       width: 35px;
@@ -22,6 +24,17 @@
       }
       &.pause-icon {
         background-image: url('/assets/pause-button.png');
+      }
+    }
+
+    .circle-position {
+      position: absolute;
+      top: 2px;
+      pointer-events: none;
+      overflow: visible;
+      .circle {
+        stroke-dasharray: 113px;
+        stroke-dashoffset: 113px;
       }
     }
   }

@@ -1,14 +1,19 @@
 <div class="track-container">
   <div class="play-track-container">
     <div class="play-single-track pointer" (click)="togglePlay()" [ngClass]="{'play-icon': !currentTrackInfo.isPlaying, 'pause-icon': currentTrackInfo.isPlaying}"></div>
+    <svg height="35" width="35" class="circle-position">
+      <circle id="circle-{{track.Id}}" class='circle'
+         cx="18" cy="16" r="18" stroke="red" 
+         stroke-width="3" fill-opacity="0" />
+    </svg>
   </div>
   <audio id="player-{{track.Id}}">
       <source src="{{ track.url }}" type="audio/mp3" />
   </audio>
   <div class="track-info">
     <div class="owner">{{ track.owner }}</div>
-    <div class="musical-instruments">{{ track.instrument }}</div>
-    <div class="bpm">bpm: {{ track.bpm}}</div>
+    <div class="musical-instruments">{{ getNameFromUrl(track.url) }}</div>
+    <div class="bpm">bpm: {{ track.bpm }}</div>
   </div>
   <div class="trash-and-bar">
     <i class="fa fa-trash-o trash-icon pointer" aria-hidden="true" (click)="removeTrack()"></i>

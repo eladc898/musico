@@ -2,9 +2,9 @@
   [style.border-color]="showWarning ? '#F46F5D' : '#cccccc'">
   <img class="dropdown-arrow" src="./assets/dropdown_arrow.png">
   <div *ngIf="selectedOption===''" class="clickable-area-ghost-text">{{placeholderText}}</div>
-  <div *ngIf="selectedOption!==''" class="clickable-area-text">Track #{{selectedOption}}</div>
+  <div *ngIf="selectedOption!==''" class="clickable-area-text">Track {{selectedOption}}</div>
   <div class="options-area" *ngIf="show">
-    <div class="option-text" *ngFor='let option of options; let i = index' (click)="select(option)">Track #{{option}}
+    <div class="option-text" *ngFor='let option of options; let i = index' (click)="select(option)">Track {{option}}
     </div>
   </div>
 </div>
