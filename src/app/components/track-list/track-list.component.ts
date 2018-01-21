@@ -59,16 +59,18 @@ export class TrackListComponent implements OnInit {
   }
 
   togglePlayAll = () => {
+    if (this.displayedTracks.length < 1) { return; }
     this.isPlayAll = !this.isPlayAll;
   }
 
   onSync = () => {
     console.log('this.leaderTrack' , this.leaderTrack);
-    
     const leaderProgressVal = this.leaderTrack.player.currentTime / this.leaderTrack.duration;
     console.log('value' , leaderProgressVal);
     _.each(this.displayedTracks, track => track.progress.value = leaderProgressVal);
     this.displayedTracks = _.orderBy(this.displayedTracks, 'duration', 'desc');
+    //TODO: Show original BPM (on click on original bpm change the bpm to the original bpm)
     this.isPlayAll = true;
+
   }
 }

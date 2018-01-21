@@ -9,7 +9,7 @@ import * as _ from 'lodash';
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.scss']
 })
-export class DropdownComponent implements OnInit, OnDestroy {
+export class DropdownComponent implements OnInit {
 
   @Output() onSelection: EventEmitter<string> = new EventEmitter<string>();
 
@@ -21,31 +21,13 @@ export class DropdownComponent implements OnInit, OnDestroy {
 
   @Input() withValidations = false;
 
-  @Input() showValidationWarning$: Observable<boolean>;
   showWarning = false;
 
   @Input() reset$: Observable<any>;
-  resetSubscription: Subscription;
 
   show = false;
 
   ngOnInit() {
-    if (this.reset$) {
-      this.resetSubscription = this.reset$.subscribe(reset => {
-        this.reset();
-      });
-    }
-    if (this.withValidations) {
-      this.showValidationWarning$.subscribe(showWarning => {
-        this.showWarning = showWarning;
-      });
-    }
-  }
-
-  ngOnDestroy() {
-    if (this.resetSubscription) {
-      this.resetSubscription.unsubscribe();
-    }
   }
 
   select(newOpt: string) {

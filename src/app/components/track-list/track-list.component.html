@@ -1,8 +1,9 @@
 <div class="track-list-container">
   <div class="content">
     <div class="sync-and-play">
-      <button class="sync-btn" (click)="onSync()">sync</button>
-      <div class="play-btn" (click)="togglePlayAll()">{{ isPlayAll ? 'stop' : 'play'}}</div>
+      <button class="sync-btn" [disabled]="displayedTracks.length < 1" (click)="onSync()">sync</button>
+      <div class="play-all-btn" [ngClass]="{'disabled': displayedTracks.length < 1}" 
+        (click)="togglePlayAll()">{{ isPlayAll ? 'stop all' : 'play all'}}</div>
       <app-dropdown class="track-select" [options]="trackIds" 
         [placeholderText]="'Select Track'" [clickableWidth]="230" 
         (onSelection)="onTrackSelection($event)"

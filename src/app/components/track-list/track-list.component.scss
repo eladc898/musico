@@ -5,6 +5,7 @@
   color:black;
   font-size:14px;
   border: 1px solid black;
+  margin: auto;
   .content {
     padding-left: 20px;
     padding-right: 20px;
@@ -14,7 +15,7 @@
       height: 80px;
       position: relative;
       border-bottom: 1px solid #C5C2C1;
-      .sync-btn, .play-btn {
+      .sync-btn, .play-all-btn {
         cursor:pointer;
         height: 30px;
         text-transform: uppercase;
@@ -32,11 +33,19 @@
         border:1px solid black;
         display:inline-block;
         width: 75px;
+        &:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
       }
-      .play-btn {
+      .play-all-btn {
         left: 85px;  
         line-height: 30px;    
         width: 75px;
+        &.disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
       }
       .track-select {
         text-transform: capitalize;
