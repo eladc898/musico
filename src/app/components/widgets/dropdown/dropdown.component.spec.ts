@@ -3,24 +3,14 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DropdownComponent } from './dropdown.component';
 
 describe('DropdownComponent', () => {
-  // let component: DropdownComponent;
-  // let fixture: ComponentFixture<DropdownComponent>;
+  const options = ['track 1', 'track 2', 'track 3'];
 
-  // beforeEach(async(() => {
-  //   TestBed.configureTestingModule({
-  //     declarations: [ DropdownComponent ]
-  //   })
-  //   .compileComponents();
-  // }));
-
-  // beforeEach(() => {
-  //   fixture = TestBed.createComponent(DropdownComponent);
-  //   component = fixture.componentInstance;
-  //   fixture.detectChanges();
-  // });
-
-  it('should create', () => {
-    // expect(component).toBeTruthy();
-    expect(0).toEqual(0);
+  it('should change selected option', () => {
+    let val = DropdownComponent.changeSelected(options, 'track 4', 0);
+    expect(val).toEqual('track 4');
+    expect(val).not.toEqual('track 1');
+    val = DropdownComponent.changeSelected(options, 'track 5', 0);
+    expect(val).toEqual('track 5');
+    expect(val).not.toEqual('track 4');
   });
 });

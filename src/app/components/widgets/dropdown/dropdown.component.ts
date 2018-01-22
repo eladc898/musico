@@ -21,6 +21,11 @@ export class DropdownComponent implements OnInit {
 
   show = false;
 
+  static changeSelected = (options: string[], option: string, index: number) => {
+    options[index] = option;
+    return options[index];
+  }
+
   ngOnInit() {
   }
 
