@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
 
 import { routes } from './routes';
 
@@ -21,7 +22,8 @@ import { DataService } from './data-service';
   imports: [
     RouterModule.forRoot(routes, {useHash: true}),
     BrowserModule,
-    HttpModule
+    HttpModule,
+    FormsModule
   ],
   providers: [
     DataService

@@ -28,7 +28,7 @@ export class TrackListComponent implements OnInit {
     // get data from json:
     this.dataService.getAll().then(data => {
       this.tracksList = data['TrackList'];
-      console.log('this.tracksList', this.tracksList);
+      console.log('tracks list: ', this.tracksList);
       // save the id's of tracks for dropdown list
       _.map(this.tracksList, track => {
         this.trackIds.push(track.Id);
@@ -62,9 +62,6 @@ export class TrackListComponent implements OnInit {
    2.calculate the new leader track
   */
   onAddPlayer = (playerObj: any) => {
-    console.log('onAddPlayer');
-    console.log('id', playerObj.id);
-    console.log('duration', playerObj.player.duration);
     this.displayedTracks[this.displayedTracks.length - 1].player = playerObj.player;
     this.displayedTracks[this.displayedTracks.length - 1].duration = playerObj.player.duration;
     this.displayedTracks[this.displayedTracks.length - 1].progress = playerObj.progress;
@@ -74,7 +71,6 @@ export class TrackListComponent implements OnInit {
     // 2.new track is the new leader
     if (!this.leaderTrack || this.leaderTrack && currentTrack.duration > this.leaderTrack.duration) {
       this.leaderTrack = currentTrack;
-      console.log('update leader', this.leaderTrack);
     }
   }
 
@@ -85,6 +81,7 @@ export class TrackListComponent implements OnInit {
     // case there are no tracks to display - playAll is disabled - nothing should happend
     if (this.displayedTracks.length < 1) { return; }
     this.isPlayAll = !this.isPlayAll;
+    // when stop all: reset syncing
     if (!this.isPlayAll) { this.isSync = false; }
   }
 
@@ -92,13 +89,11 @@ export class TrackListComponent implements OnInit {
     1.calculate leader's current progress
     2.update all other tracks to the leader's progress
     3.sort the displayed tracks from the longest to the shortest
-    4.show original bpm
+    4.update to leader's bpm
     5.apply playAll event
   */
   onSync = () => {
-    console.log('this.leaderTrack' , this.leaderTrack);
     const leaderProgressVal = this.leaderTrack.player.currentTime / this.leaderTrack.duration;
-    console.log('value' , leaderProgressVal);
     _.each(this.displayedTracks, track => track.progress.value = leaderProgressVal);
     this.displayedTracks = _.orderBy(this.displayedTracks, 'duration', 'desc');
     this.isSync = true;

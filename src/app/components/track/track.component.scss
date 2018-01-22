@@ -38,6 +38,9 @@
       }
     }
   }
+  .progress-bar { 
+    display: none;
+  }
   .track-info {
     width:120px;
     display: flex;
@@ -57,14 +60,18 @@
       text-transform: uppercase;
     }
   }
-  .trash-and-bar {
+  .trash-and-volume {
     width:65px;
     position: relative;
     .trash-icon {
       position: absolute;
       right: 0;
     }
-    .bar-and-volume {
+    .track-bars {
+      position: absolute;
+      right: 30px;
+    }
+    .volume-container {
       position: absolute;
       top: 23px;
       width: 100%;
@@ -73,7 +80,7 @@
       .volume-icon {
         padding-top: 5px;
       }
-      .bar {
+      .volume-bar {
         width: 40px;
       }
     }

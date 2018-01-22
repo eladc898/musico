@@ -10,18 +10,22 @@
   <audio id="player-{{track.Id}}">
       <source src="{{ track.url }}" type="audio/mp3" />
   </audio>
+  <input id="progress-bar-{{track.Id}}" class="progress-bar" value="0" type="range" min="0" max="1" step="any" />
   <div class="track-info">
     <div class="owner">{{ track.owner }}</div>
     <div class="musical-instruments">{{ getNameFromUrl(track.url) }}</div>
     <div class="bpm pointer" (click)="resetBpm()">bpm: {{ showOriginalBpm ? track.bpm : leaderTrack.bpm }}</div>
   </div>
-  <div class="trash-and-bar">
+  <div class="trash-and-volume">
     <i class="fa fa-trash-o trash-icon pointer" aria-hidden="true" (click)="removeTrack()"></i>
-    <div class="bar-and-volume">
+    <div class="track-bars">{{ trackBars }}</div>
+    <div class="volume-container">
       <i class="fa pointer volume-icon" aria-hidden="true" (click)="toggleVolume()"
         [ngClass]="{'fa-volume-up': !currentTrackInfo.isMuted, 'fa-volume-down': currentTrackInfo.isMuted}">
       </i>
-      <input id="progress-bar-{{track.Id}}" class="bar pointer" value="0" type="range" min="0" max="1" step="any" />
+      <input class="volume-bar pointer"
+         type="range" min="0" max="1" step="any"
+         [(ngModel)]="volume" (ngModelChange)="changeVolume($event)" />
     </div>
   </div>
 </div>

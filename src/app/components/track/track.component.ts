@@ -31,7 +31,13 @@ export class TrackComponent implements OnInit, AfterViewInit, OnChanges {
     isPlaying: boolean;
     isMuted: boolean;
   };
+  // which bpm to show
   showOriginalBpm = true;
+  // displaying number of track bars for this track
+  trackBars = 0;
+  // volume value
+  volume = 0.5;
+
   constructor() { }
 
   ngOnInit() {
@@ -41,8 +47,8 @@ export class TrackComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   /* when UI is loaded:
-    1.save the needed elements in component varibles
-    2.binding events : timeupdate - track is palying
+    1.save the needed elements in component variables
+    2.binding events : timeupdate - track is playing
                        ended - track finished playing
                        loadedmetadata - audio player is loaded - emit the values to the track list
   */
@@ -55,6 +61,7 @@ export class TrackComponent implements OnInit, AfterViewInit, OnChanges {
     this.player.addEventListener('loadedmetadata', () => {
       this.addPlayerEvt.emit({id : this.track.Id, player: this.player, progress: this.progressBar});
       }, false);
+    // this.player.addEventListener('volumechange', this.changeVolume);
   }
 
   // listen to input changes
@@ -62,12 +69,13 @@ export class TrackComponent implements OnInit, AfterViewInit, OnChanges {
     if (!this.currentTrackInfo) { return; }
     /* when isPlayAll changing:
       1.reset player to the beginning
-      2.when isPlayAll is on: start play track in loop
+      2.when isPlayAll is on: start play track in loop and calculate trackBars
       3.when isPlayAll is off: stop track
     */
     this.player.currentTime = 0;
     if (this.isPlayAll) {
       this.currentTrackInfo.isPlaying = true;
+      this.getTrackBars();
       this.player.play();
       this.player.loop = true;
     }
@@ -87,8 +95,6 @@ export class TrackComponent implements OnInit, AfterViewInit, OnChanges {
   updateProgressBar = () => {
     // when the player metadata isn't loaded yet: ignore the event
     if (!this.player) { return; }
-    console.log('currentTime', this.player.currentTime);
-    console.log('duration', this.player.duration);
     this.progressBar.value = this.player.currentTime / this.player.duration;
     this.circleprogressBar.style['stroke-dashoffset'] = (this.progressBar.value * Consts.STARTING_OFFSET
        + Consts.STARTING_OFFSET)  + 'px';
@@ -103,6 +109,10 @@ export class TrackComponent implements OnInit, AfterViewInit, OnChanges {
     this.currentTrackInfo.isPlaying = false;
   }
 
+  changeVolume = (evt) => {
+    this.player.volume = this.volume;
+  }
+
   /* On play toggle:
    1.update track info
    2.play/pause player according to active flag
@@ -110,6 +120,7 @@ export class TrackComponent implements OnInit, AfterViewInit, OnChanges {
   togglePlay = () => {
     this.currentTrackInfo.isPlaying = !this.currentTrackInfo.isPlaying;
     if (this.currentTrackInfo.isPlaying) {
+      this.getTrackBars();
       this.player.play();
       this.player.loop = false;
     }
@@ -137,6 +148,7 @@ export class TrackComponent implements OnInit, AfterViewInit, OnChanges {
     this.removeTrackEvt.emit(this.track.Id);
   }
 
+  // reset to the original bpm on click
   resetBpm = () => {
     this.showOriginalBpm = true;
   }
@@ -145,5 +157,10 @@ export class TrackComponent implements OnInit, AfterViewInit, OnChanges {
   getNameFromUrl = (url: string) => {
     const tmpArr = url.split('/');
     return tmpArr[tmpArr.length - 1].split('.')[0].replace('+', ' ');
+  }
+
+  getTrackBars = () => {
+    if (!this.player) { return; }
+    this.trackBars = Math.trunc(this.track.bpm / this.player.duration);
   }
 }
