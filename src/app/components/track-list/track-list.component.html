@@ -6,8 +6,7 @@
         (click)="togglePlayAll()">{{ isPlayAll ? 'stop all' : 'play all'}}</div>
       <app-dropdown class="track-select" [options]="trackIds" 
         [placeholderText]="'Select Track'" [clickableWidth]="230" 
-        (onSelection)="onTrackSelection($event)"
-        [withValidations]="false" [reset$]="clearFilter$">
+        (onSelection)="onTrackSelection($event)">
       </app-dropdown>
     </div>
     <div class="tracks">

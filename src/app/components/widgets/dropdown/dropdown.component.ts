@@ -1,7 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
-
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import * as _ from 'lodash';
 
 @Component({
@@ -9,8 +6,11 @@ import * as _ from 'lodash';
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.scss']
 })
+
+// Generic dropdown widget with input list to display
 export class DropdownComponent implements OnInit {
 
+  // send the selected object to the parent event
   @Output() onSelection: EventEmitter<string> = new EventEmitter<string>();
 
   @Input() options: string[];
@@ -19,26 +19,18 @@ export class DropdownComponent implements OnInit {
 
   @Input() clickableWidth = 300;
 
-  @Input() withValidations = false;
-
-  showWarning = false;
-
-  @Input() reset$: Observable<any>;
-
   show = false;
 
   ngOnInit() {
   }
 
+  // update selected option and send it to the parent component
   select(newOpt: string) {
     this.selectedOption = newOpt;
     this.notify(newOpt);
   }
 
-  initialOptionExists() {
-    return this.selectedOption !== '';
-  }
-
+  // emit selection event
   notify(state: string) {
     this.onSelection.emit(state);
   }
