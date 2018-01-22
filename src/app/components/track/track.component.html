@@ -13,7 +13,7 @@
   <div class="track-info">
     <div class="owner">{{ track.owner }}</div>
     <div class="musical-instruments">{{ getNameFromUrl(track.url) }}</div>
-    <div class="bpm">bpm: {{ track.bpm }}</div>
+    <div class="bpm pointer" (click)="resetBpm()">bpm: {{ showOriginalBpm ? track.bpm : leaderTrack.bpm }}</div>
   </div>
   <div class="trash-and-bar">
     <i class="fa fa-trash-o trash-icon pointer" aria-hidden="true" (click)="removeTrack()"></i>

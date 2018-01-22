@@ -10,8 +10,12 @@ export class TrackComponent implements OnInit, AfterViewInit, OnChanges {
 
   // input track from track list:
   @Input() track: any;
-  // input: if playAll is on/off
+  // input leaderTrack from track list:
+  @Input() leaderTrack: any;
+  // input: playAll is on/off
   @Input() isPlayAll: boolean;
+  // input: isSync is on/off
+  @Input() isSync: boolean;
 
   @Output() removeTrackEvt: EventEmitter<string> = new EventEmitter<string>();
   @Output() addPlayerEvt: EventEmitter<any> = new EventEmitter<any>();
@@ -27,6 +31,7 @@ export class TrackComponent implements OnInit, AfterViewInit, OnChanges {
     isPlaying: boolean;
     isMuted: boolean;
   };
+  showOriginalBpm = true;
   constructor() { }
 
   ngOnInit() {
@@ -69,6 +74,10 @@ export class TrackComponent implements OnInit, AfterViewInit, OnChanges {
     else {
       this.currentTrackInfo.isPlaying = false;
       this.player.pause();
+    }
+    // show leader's bpm when sync is on
+    if (this.isSync) {
+      this.showOriginalBpm = false;
     }
   }
 
@@ -126,6 +135,10 @@ export class TrackComponent implements OnInit, AfterViewInit, OnChanges {
   // on remove click: emit event to trackList component to delete it from displayed list
   removeTrack = () => {
     this.removeTrackEvt.emit(this.track.Id);
+  }
+
+  resetBpm = () => {
+    this.showOriginalBpm = true;
   }
 
   // parse track's name fron url

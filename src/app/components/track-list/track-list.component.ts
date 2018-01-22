@@ -19,6 +19,8 @@ export class TrackListComponent implements OnInit {
   leaderTrack;
   // isPlayAll flag
   isPlayAll = false;
+  // isSync flag
+  isSync = false;
 
   constructor(private dataService: DataService) {}
 
@@ -83,6 +85,7 @@ export class TrackListComponent implements OnInit {
     // case there are no tracks to display - playAll is disabled - nothing should happend
     if (this.displayedTracks.length < 1) { return; }
     this.isPlayAll = !this.isPlayAll;
+    if (!this.isPlayAll) { this.isSync = false; }
   }
 
   /* On sync click:
@@ -98,8 +101,7 @@ export class TrackListComponent implements OnInit {
     console.log('value' , leaderProgressVal);
     _.each(this.displayedTracks, track => track.progress.value = leaderProgressVal);
     this.displayedTracks = _.orderBy(this.displayedTracks, 'duration', 'desc');
-    //TODO: Show original BPM (on click on original bpm change the bpm to the original bpm)
+    this.isSync = true;
     this.isPlayAll = true;
-
   }
 }

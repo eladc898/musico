@@ -12,6 +12,7 @@
     <div class="tracks">
       <app-track *ngFor="let track of displayedTracks; let i = index" 
         [track]="track" [isPlayAll]="isPlayAll" 
+        [isSync]="isSync" [leaderTrack]="leaderTrack"
         (removeTrackEvt)="onRemoveTrack($event)"
         (addPlayerEvt)="onAddPlayer($event)">
       </app-track>
