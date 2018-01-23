@@ -26,6 +26,8 @@ export class DropdownComponent implements OnInit {
     return options[index];
   }
 
+  constructor() {}
+
   ngOnInit() {
   }
 
