@@ -61,11 +61,11 @@ export class TrackComponent implements OnInit, AfterViewInit, OnChanges {
     this.player.addEventListener('loadedmetadata', () => {
       this.addPlayerEvt.emit({id : this.track.Id, player: this.player, progress: this.progressBar});
       }, false);
-    // this.player.addEventListener('volumechange', this.changeVolume);
   }
 
   // listen to input changes
   ngOnChanges (changes: SimpleChanges) {
+    console.log('changes', changes);
     if (!this.currentTrackInfo) { return; }
     /* when isPlayAll changing:
       1.reset player to the beginning
@@ -101,7 +101,7 @@ export class TrackComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   /* On ended event of the player:
-    q.reset the player
+    1.reset the player
     2.update track's info
   */
   resetTrack = () => {
@@ -109,6 +109,9 @@ export class TrackComponent implements OnInit, AfterViewInit, OnChanges {
     this.currentTrackInfo.isPlaying = false;
   }
 
+  /* On change Volume event of the volume-bar:
+    update player's volume
+  */
   changeVolume = (evt) => {
     this.player.volume = this.volume;
   }
