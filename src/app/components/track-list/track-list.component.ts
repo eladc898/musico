@@ -26,7 +26,7 @@ export class TrackListComponent implements OnInit {
 
   ngOnInit() {
     // get data from json:
-    this.dataService.getAll().then(data => {
+    this.dataService.getAll('./assets/trackList.json').then(data => {
       this.tracksList = data['TrackList'];
       console.log('tracks list: ', this.tracksList);
       // save the id's of tracks for dropdown list

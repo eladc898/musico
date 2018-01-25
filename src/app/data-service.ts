@@ -3,12 +3,12 @@ import { Http } from '@angular/http';
 
 @Injectable()
 export class DataService {
-  public apiHost = './assets/trackList.json';
+  
   constructor(private http: Http) { }
 
   // get data from json:
-  public getAll(): Promise<Object> {
-      return this.http.get(this.apiHost)
+  public getAll(url: string): Promise<Object> {
+      return this.http.get(url)
         .toPromise()
         .then((response) => {
           return response.json();

@@ -1,35 +1,20 @@
-import { Component, SimpleChanges } from '@angular/core';
+import { Component } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import * as util from '@angular/core/src/change_detection/change_detection_util';
 import { FormsModule } from '@angular/forms';
-
 import { TrackComponent } from './track.component';
-import { SimpleChange } from '@angular/core/src/change_detection/change_detection_util';
 
-@Component({
-  template: ''
-})
-class TestHostComponent {
-  track: any;
-}
-
-fdescribe('TrackComponent', () => {
-  const component: TrackComponent = new TrackComponent;
-
-  let fixture, track, testHost, element, de;
+describe('TrackComponent', () => {
+  let fixture, track, element;
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ TrackComponent, TestHostComponent ],
+      declarations: [ TrackComponent ],
       imports: [
         FormsModule
       ]
     });
     fixture = TestBed.createComponent(TrackComponent);
     track = fixture.componentInstance;
-    testHost = fixture.componentInstance;
     element = fixture.nativeElement;
-    de = fixture.debugElement;
-
 
     track.ngOnInit();
     track.track = {
@@ -47,26 +32,39 @@ fdescribe('TrackComponent', () => {
     };
     track.isSync = false;
     track.isPlayAll = false;
+
+    track.player = document.createElement('audio');
+    track.player.id = 'player-' + track.Id;
+    track.player.src = track.url;
   });
 
 
-  it('should init component correctly', () => {
+  it('should create TrackComponent', () => {
     expect(track).toBeTruthy();
-    expect(track.player).toBeUndefined();
+    expect(track.volume).toBeGreaterThan(0);
+    expect(track.currentTrackInfo).toBeDefined();
+    expect(track.player).toBeDefined();
     expect(track.progressBar).toBeUndefined();
-
   });
 
-  it('should init component view correctly', () => {
-    testHost.isPlayAll = true;
-    console.log('before ?', track);
-    // track.ngOnChanges({
-    //   isPlayAll: new SimpleChange(null, track.isPlayAll, true)
-    // });
-    fixture.detectChanges();
-    console.log('after ?', track);
-    // expect(track.isPlayAll).toBeTruthy();
-    // expect(track.player).toBeDefined();
-    // expect(track.progressBar).toBeDefined();
+  it('should reset component', () => {
+    track.currentTrackInfo.isPlaying = true;
+    track.player.currentTime = 12;
+    track.resetTrack();
+    expect(track.currentTrackInfo.isPlaying).toBeFalsy();
+    expect(track.player.currentTime).toBe(0);
+  });
+
+  it('should test togglePlay()', () => {
+    track.togglePlay();
+    expect(track.currentTrackInfo.isPlaying).toBeTruthy();
+    expect(track.player.loop).toBeFalsy();
+  });
+
+  it('should test toggleVolume()', () => {
+    track.toggleVolume();
+    expect(track.currentTrackInfo.isMuted).toBeTruthy();
+    track.toggleVolume();
+    expect(track.currentTrackInfo.isMuted).toBeFalsy();
   });
 });

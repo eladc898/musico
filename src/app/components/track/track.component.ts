@@ -65,7 +65,6 @@ export class TrackComponent implements OnInit, AfterViewInit, OnChanges {
 
   // listen to input changes
   ngOnChanges (changes: SimpleChanges) {
-    console.log('changes', changes);
     if (!this.currentTrackInfo) { return; }
     /* when isPlayAll changing:
       1.reset player to the beginning
