@@ -18,7 +18,7 @@
   </div>
   <div class="trash-and-volume">
     <i class="fa fa-trash-o trash-icon pointer" aria-hidden="true" (click)="removeTrack()"></i>
-    <div class="track-bars">{{ trackBars }}</div>
+    <div class="track-bars">Bits: {{ trackBars }}</div>
     <div class="volume-container">
       <i class="fa pointer volume-icon" aria-hidden="true" (click)="toggleVolume()"
         [ngClass]="{'fa-volume-up': !currentTrackInfo.isMuted, 'fa-volume-down': currentTrackInfo.isMuted}">
