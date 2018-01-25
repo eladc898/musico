@@ -18,7 +18,7 @@ export class TrackComponent implements OnInit, AfterViewInit, OnChanges {
   // input: isSync is on/off
   @Input() isSync: boolean;
 
-  @Output() removeTrackEvt: EventEmitter<string> = new EventEmitter<string>();
+  @Output() removeTrackEvt: EventEmitter<number> = new EventEmitter<number>();
   @Output() addPlayerEvt: EventEmitter<any> = new EventEmitter<any>();
 
   // the player element
