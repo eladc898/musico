@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../data-service';
+import { Track } from '../../track.model';
 import * as _ from 'lodash';
 
 @Component({
@@ -10,13 +11,13 @@ import * as _ from 'lodash';
 export class TrackListComponent implements OnInit {
 
   // all tracks from json
-  tracksList = [];
+  tracksList: Track[] = [];
   // tracks to displaye
-  displayedTracks = [];
+  displayedTracks: Track[] = [];
   // track id's for dropdown list
-  trackIds = [];
+  trackIds: number[] = [];
   // the leader track - leader is the longest track
-  leaderTrack;
+  leaderTrack: Track;
   // isPlayAll flag
   isPlayAll = false;
   // isSync flag

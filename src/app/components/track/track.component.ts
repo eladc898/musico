@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, SimpleChange } from '@angular/core';
 import * as Consts from '../../constants';
+import { Track } from '../../track.model';
 
 @Component({
   selector: 'app-track',
@@ -9,9 +10,9 @@ import * as Consts from '../../constants';
 export class TrackComponent implements OnInit, AfterViewInit, OnChanges {
 
   // input track from track list:
-  @Input() track: any;
+  @Input() track: Track;
   // input leaderTrack from track list:
-  @Input() leaderTrack: any;
+  @Input() leaderTrack: Track;
   // input: playAll is on/off
   @Input() isPlayAll: boolean;
   // input: isSync is on/off
